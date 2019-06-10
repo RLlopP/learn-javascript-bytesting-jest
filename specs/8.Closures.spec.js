@@ -6,7 +6,7 @@ describe('Closures', () => {
     };
     const six = makeConstant(6);
 
-    expect(solveme).toBe(six());
+    expect(6).toBe(six());
   });
 
   it('inner functions can use parent variables', () => {
@@ -19,7 +19,7 @@ describe('Closures', () => {
     };
     let countGuests = makeCountFn();
 
-    expect(solveme).toBe(countGuests());
+    expect(1).toBe(countGuests());
   });
 
   it('each time that a parent is called a new set of variables is created', () => {
@@ -33,11 +33,11 @@ describe('Closures', () => {
     let countGuests = makeCountFn();
     let countAudience = makeCountFn();
 
-    expect(solveme).toBe(countGuests());
-    expect(solveme).toBe(countGuests());
-    expect(solveme).toBe(countAudience());
-    expect(solveme).toBe(countGuests());
-    expect(solveme).toBe(countAudience());
+    expect(1).toBe(countGuests());
+    expect(2).toBe(countGuests());
+    expect(1).toBe(countAudience());
+    expect(3).toBe(countGuests());
+    expect(2).toBe(countAudience());
   });
 
   it('can can be used to create objects with private variables (module pattern)', () => {
@@ -52,8 +52,8 @@ describe('Closures', () => {
 
     counter.incr();
     counter.incr();
-    expect(solveme).toBe(counter.get());
-    expect(solveme).toBe(counter.count);
+    expect(2).toBe(counter.get());
+    expect(undefined).toBe(counter.count);
   });
 
   it('use array traversal high order functions', () => {
@@ -64,9 +64,9 @@ describe('Closures', () => {
     }
     const [one,two,three] = makeConstants();
 
-    expect(solveme).toBe(one());
-    expect(solveme).toBe(two());
-    expect(solveme).toBe(three());
+    expect(1).toBe(one());
+    expect(2).toBe(two());
+    expect(3).toBe(three());
   });
 
   it('avoid loops', () => {
@@ -81,9 +81,9 @@ describe('Closures', () => {
     }
     const [one,two,three] = makeConstants();
 
-    expect(solveme).toBe(one());
-    expect(solveme).toBe(two());
-    expect(solveme).toBe(three());
+    expect(4).toBe(one());
+    expect(4).toBe(two());
+    expect(4).toBe(three());
   });
 
   it('a closure is very similar to an object', () => {
@@ -105,8 +105,8 @@ describe('Closures', () => {
     }
     let countGuests = makeCountFn();
     let audienceCounter = new Counter();
-    expect(solveme).toBe(countGuests());
-    expect(solveme).toBe(audienceCounter.count());
+    expect(1).toBe(countGuests());
+    expect(1).toBe(audienceCounter.count());
   });
 
   it('but closures has private variables', () => {
@@ -128,8 +128,8 @@ describe('Closures', () => {
     }
     let countGuests = makeCountFn();
     let audienceCounter = new Counter();
-    expect(solveme).toBe(countGuests.count);
-    expect(solveme).toBe(audienceCounter._count);
+    expect(undefined).toBe(countGuests.count);
+    expect(0).toBe(audienceCounter._count);
   });
 
 });
