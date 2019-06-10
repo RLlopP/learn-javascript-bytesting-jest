@@ -205,7 +205,7 @@ describe("Objects", () => {
 
       it("non string keys are converted into string", () => {
         object[123] = {some: "value"};
-        expect(solveme).toEqual(object["123"]);
+        expect({some: "value"}).toEqual(object["123"]);
       });
 
       it("non string keys are converted into string, consider using Map", () => {
@@ -213,7 +213,7 @@ describe("Objects", () => {
         const blueCar = {color: 'blue'};
         object[redCar] = 'is the fastest';
         object[blueCar] = 'is the slowest';
-        expect(solveme).toEqual(object[redCar]);
+        expect().toEqual(object[redCar]);
       });
 
     });

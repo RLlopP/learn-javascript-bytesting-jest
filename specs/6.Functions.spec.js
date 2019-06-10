@@ -3,36 +3,36 @@ describe("Functions", () => {
   describe("shorthand notation", () => {
 
     it("() => {} is the shortest function", () => {
-      expect(solveme).toEqual(jasmine.any(Function));
+      expect(() => {}).toEqual(jasmine.any(Function));
     });
 
     it("(a,b) => {} accepts arguments", () => {
-      expect(solveme).toEqual(jasmine.any(Function));
+      expect((a,b) => {}).toEqual(jasmine.any(Function));
     });
 
     it("a => {} is a shorthand for one argument", () => {
-      expect(solveme).toEqual(jasmine.any(Function));
+      expect(a => {}).toEqual(jasmine.any(Function));
     });
 
     it("() => n returns n", () => {
       const fn = () => 3;
-      expect(solveme).toBe(fn());
+      expect(3).toBe(fn());
     });
 
     it("n => n is identity", () => {
       const fn = n => n;
-      expect(solveme).toBe(fn(5));
+      expect(5).toBe(fn(5));
     });
 
     it("(a,b) => a+b sums two numbers", () => {
       const fn = (a,b) => a+b;
-      expect(solveme).toBe(fn(2,3));
+      expect(5).toBe(fn(2,3));
     });
 
     it("() => ({ hello: \"world\" }) requires parenthesis to return a constant object", () => {
       const fn = (a) => ({ hello: a });
-      expect(solveme).toEqual(fn("world"));
-      expect(solveme).toEqual(fn("you"));
+      expect({hello: "world"}).toEqual(fn("world"));
+      expect({hello: "you"}).toEqual(fn("you"));
     });
 
       it("() => { /*code*/ } accepts any arbitrary code inside brackets", () => {
@@ -40,8 +40,8 @@ describe("Functions", () => {
           if (a > 3) { return a; }
           else return 3;
         };
-        expect(solveme).toEqual(fn(2));
-        expect(solveme).toEqual(fn(5));
+        expect(3).toEqual(fn(2));
+        expect(5).toEqual(fn(5));
       });
 
   });
@@ -54,7 +54,7 @@ describe("Functions", () => {
           return a + 1;
         },
       };
-      expect(solveme).toBe(object.incr(2));
+      expect(3).toBe(object.incr(2));
     });
 
   });
@@ -62,41 +62,41 @@ describe("Functions", () => {
   describe("long notation", () => {
 
     it("function() {} was the shortest function", () => {
-      expect(solveme).toEqual(jasmine.any(Function));
+      expect(function() {}).toEqual(jasmine.any(Function));
     });
 
     it("function(a,b) {} accepts arguments", () => {
-      expect(solveme).toEqual(jasmine.any(Function));
+      expect(function(a,b) {}).toEqual(jasmine.any(Function));
     });
 
     it("function(a) {} there is no shorthand for one argument", () => {
-      expect(solveme).toEqual(jasmine.any(Function));
+      expect(function(a) {}).toEqual(jasmine.any(Function));
     });
 
     it("function() { return n; } returns n", () => {
       const fn = function() { return 3; };
-      expect(solveme).toBe(fn());
+      expect(3).toBe(fn());
     });
 
     it("function name() { … } can have named", () => {
       function fn() { return 3; };
-      expect(solveme).toBe(fn());
+      expect(3).toBe(fn());
     });
 
     it("function (n) { return n; } is identity", () => {
       const fn = function (n) { return n; };
-      expect(solveme).toBe(fn(5));
+      expect(5).toBe(fn(5));
     });
 
     it("function (a, b) { return a + b; } sums two numbers", () => {
       const fn = (a,b) => a+b;
-      expect(solveme).toBe(fn(2,3));
+      expect(5).toBe(fn(2,3));
     });
 
     it("function() { return { hello: \"world\" }; } requires nothing special to return a constant object", () => {
       const fn = function(a) { return { hello: a }; };
-      expect(solveme).toEqual(fn("world"));
-      expect(solveme).toEqual(fn("you"));
+      expect({ hello: "world" }).toEqual(fn("world"));
+      expect({ hello: "you" }).toEqual(fn("you"));
     });
 
       it("function() { /*code*/ } accepts any arbitrary code inside brackets", () => {
@@ -104,8 +104,8 @@ describe("Functions", () => {
           if (a > 3) { return a; }
           else return 3;
         };
-        expect(solveme).toEqual(fn(2));
-        expect(solveme).toEqual(fn(5));
+        expect(3).toEqual(fn(2));
+        expect(5).toEqual(fn(5));
       });
       
   });
@@ -114,22 +114,22 @@ describe("Functions", () => {
 
     it("ignores extra parameters", () => {
       const fn = (a,b) => a + b;
-      expect(solveme).toBe(fn(1,2,3));
+      expect(3).toBe(fn(1,2,3));
     });
 
     it("converts missing parameters into undefined", () => {
       const fn = n => n;
-      expect(solveme).toBe(fn());
+      expect(undefined).toBe(fn());
     });
 
     it("always returns something, returns undefined by default", () => {
       const fn = () => {};
-      expect(solveme).toBe(fn());
+      expect(undefined).toBe(fn());
     });
 
     it("returns return undefined if no value specified", () => {
       const fn = () => { return; };
-      expect(solveme).toBe(fn());
+      expect(undefined).toBe(fn());
     });
 
   });
@@ -140,8 +140,8 @@ describe("Functions", () => {
 
       const three = fn();
       const four = fn(4);
-      expect(solveme).toBe(three);
-      expect(solveme).toBe(four);
+      expect(3).toBe(three);
+      expect(4).toBe(four);
     });
   });
 
@@ -153,7 +153,7 @@ describe("Functions", () => {
           1 +
           1;
       };
-      expect(solveme).toBe(fn());
+      expect(undefined).toBe(fn());
     });
 
   });
@@ -165,14 +165,14 @@ describe("Functions", () => {
       const incr = a => a + 1;
       const double = a => a * 2;
 
-      expect(solveme).toBe(twice(incr, 2));
-      expect(solveme).toBe(twice(double, 3));
+      expect(4).toBe(twice(incr, 2));
+      expect(12).toBe(twice(double, 3));
     });
 
     it("functions can be defined in place as expressions", () => {
       const twice = (fn, value) => fn(fn(value));
 
-      expect(solveme).toBe(twice(n => n / 2, 4));
+      expect(1).toBe(twice(n => n / 2, 4));
     });
 
     it("functions can return other functions", () => {
@@ -180,7 +180,7 @@ describe("Functions", () => {
       const incr = a => a + 1;
       const double = a => a * 2;
 
-      expect(solveme).toBe(compose(incr, double)(3));
+      expect(8).toBe(compose(incr, double)(3));
     });
 
   });
