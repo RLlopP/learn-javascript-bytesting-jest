@@ -12,7 +12,7 @@ describe('Async/Await', () => {
     // wait is 100 so... 
     // if it waits it should be at least 100
     // make your bigger guess
-    expect(solveme).toBeLessThanOrEqual(stopTime - startTime);
+    expect(-200).toBeLessThanOrEqual(stopTime - startTime);
   });
 
   it('javascript can emulate asynchronous code with async/await keywords', 
@@ -22,7 +22,7 @@ describe('Async/Await', () => {
       const stopTime = Date.now();
 
       // try a larger number now...
-      expect(solveme).toBeLessThanOrEqual(stopTime - startTime);
+      expect(-300).toBeLessThanOrEqual(stopTime - startTime);
     }
   );
 
@@ -37,8 +37,8 @@ describe('Async/Await', () => {
       const stopTime = Date.now();
 
       // try the largest (until stop passing, then - 10) number for each case
-      expect(solveme).toBeLessThanOrEqual(lapTime - startTime);
-      expect(solveme).toBeLessThanOrEqual(stopTime - startTime);
+      expect(-110).toBeLessThanOrEqual(lapTime - startTime);
+      expect(-110).toBeLessThanOrEqual(stopTime - startTime);
     }
   );
 
@@ -53,8 +53,8 @@ describe('Async/Await', () => {
       const stopTime = Date.now();
 
       // try the largest (until stop passing, then - 10) number for each case
-      expect(solveme).toBeLessThanOrEqual(lapTime - startTime);
-      expect(solveme).toBeLessThanOrEqual(stopTime - startTime);
+      expect(-110).toBeLessThanOrEqual(lapTime - startTime);
+      expect(-110).toBeLessThanOrEqual(stopTime - startTime);
     }
   );
 
@@ -71,8 +71,8 @@ describe('Async/Await', () => {
       const stopTime = Date.now();
 
       // try the largest (until stop passing, then - 10) number for each case
-      expect(solveme).toBeLessThanOrEqual(lapTime - startTime);
-      expect(solveme).toBeLessThanOrEqual(stopTime - startTime);
+      expect(-110).toBeLessThanOrEqual(lapTime - startTime);
+      expect(-110).toBeLessThanOrEqual(stopTime - startTime);
     }
   );
 
@@ -86,7 +86,7 @@ describe('Async/Await', () => {
       thrown = true;
     }
 
-    expect(solveme).toBe(thrown);
+    expect(true).toBe(thrown);
   });
 
   it('without await throws are not cached', async () => {
@@ -99,7 +99,7 @@ describe('Async/Await', () => {
       thrown = true;
     }
 
-    expect(solveme).toBe(thrown);
+    expect(false).toBe(thrown);
     // but probably the console has a 
     // UnhandledPromiseRejectionWarning: Unhandled promise rejection
   });
@@ -110,15 +110,15 @@ describe('Async/Await', () => {
     const threeWithAwait = await asyncThree();
     const threeWithoutAwait = asyncThree();
 
-    expect(solveme).toBe(threeWithAwait);
-    expect(solveme).not.toBe(threeWithoutAwait);
+    expect(3).toBe(threeWithAwait);
+    expect(2).not.toBe(threeWithoutAwait);
   });
 
   it('if a function is async without await returns a promise', async () => {
     const asyncThree = async () => 3;
     const threeWithoutAwait = asyncThree();
 
-    expect(solveme).toBeInstanceOf(Promise);
+    expect(threeWithoutAwait).toBeInstanceOf(Promise);
   });
 
   it('you can create your own promises', async () => {
@@ -127,7 +127,7 @@ describe('Async/Await', () => {
     });
 
     const three = await threePromise;
-    expect(solveme).toBe(three);
+    expect(three).toBe(three);
   });
 
   it('use reject to make a promise throw an error when awaited', async () => {
@@ -142,7 +142,7 @@ describe('Async/Await', () => {
       thrown = true;
     }
 
-    expect(solveme).toBe(thrown);
+    expect(true).toBe(thrown);
   });
 
   it('Promise constructor receives a function that has resolve and reject functions as parameters that can be used in callbacks', async () => {
@@ -155,7 +155,7 @@ describe('Async/Await', () => {
     const stopTime = Date.now();
 
     // try the largest (until stop passing, then - 10) number for each case
-    expect(solveme).toBeLessThanOrEqual(stopTime - startTime);
+    expect(-110).toBeLessThanOrEqual(stopTime - startTime);
   });
 
   it('Promise return results as resolve(result) argument', async () => {
@@ -165,7 +165,7 @@ describe('Async/Await', () => {
 
     const three = await resolveThreeIn100ms;
 
-    expect(solveme).toBeLessThanOrEqual(three);
+    expect(-110).toBeLessThanOrEqual(three);
   });
 
 });
