@@ -3,13 +3,13 @@ describe("Classes", () => {
   describe("definition", () => {
     it("are defined using class keyword", () => {
       class Animal {};
-      expect().toBeDefined();
+      expect(Animal).toBeDefined();
     });
 
     it("new creates new instances", () => {
       class Animal {};
       const animal = new Animal();
-      expect(solveme).toBeInstanceOf(Animal);
+      expect(animal).toBeInstanceOf(Animal);
     });
   });
 
@@ -17,14 +17,14 @@ describe("Classes", () => {
     it("class instances are objects", () => {
       class Animal {};
       const animal = new Animal();
-      expect(solveme).toEqual(jasmine.any(Object));
+      expect(animal).toEqual(jasmine.any(Object));
     });
 
     it("you can get/set properties to class object like any object", () => {
       class Animal {};
       const animal = new Animal();
       animal.name = "skipper";
-      expect(solveme).toEqual(animal.name);
+      expect("skipper").toEqual(animal.name);
     });
 
     it("instance methods are defined in the class", () => {
@@ -33,8 +33,8 @@ describe("Classes", () => {
         salute(name) { return "hi " + name; }
       }
       const animal = new Animal();
-      expect(solveme).toBe(animal.getName());
-      expect(solveme).toBe(animal.salute("kowalski"));
+      expect("skipper").toBe(animal.getName());
+      expect("hi kowalski").toBe(animal.salute("kowalski"));
     });
   });
 
@@ -45,7 +45,7 @@ describe("Classes", () => {
       }
       const animal = new Animal();
       animal.name = "skipper";
-      expect(solveme).toBe(animal.salute());
+      expect("hi skipper").toBe(animal.salute());
     });
 
     it("without this it reads parent variables", () => {
@@ -55,7 +55,7 @@ describe("Classes", () => {
       }
       const animal = new Animal();
       animal.name = "skipper";
-      expect(solveme).toBe(animal.salute());
+      expect("hi nobody").toBe(animal.salute());
     });
 
     it("uses this to call to its own methods", () => {
@@ -64,7 +64,7 @@ describe("Classes", () => {
         salute() { return "hi " + this.getName(); }
       }
       const animal = new Animal();
-      expect(solveme).toBe(animal.salute());
+      expect("hi skipper").toBe(animal.salute());
     });
 
     it("without this it calls a parent function", () => {
@@ -74,7 +74,7 @@ describe("Classes", () => {
         salute() { return "hi " + getName(); }
       }
       const animal = new Animal();
-      expect(solveme).toBe(animal.salute());
+      expect("hi savio").toBe(animal.salute());
     });
 
     it("can create dynamically new own properties through this", () => {
@@ -84,7 +84,7 @@ describe("Classes", () => {
       }
       const animal = new Animal();
       animal.setName("rico");
-      expect(solveme).toBe(animal.getName());
+      expect("rico").toBe(animal.getName());
     });
 
     it("there are no private properties", () => {
@@ -93,7 +93,7 @@ describe("Classes", () => {
       }
       const animal = new Animal();
       animal.setName("rico");
-      expect(solveme).toBe(animal.name);
+      expect("rico").toBe(animal.name);
     });
   });
 
@@ -104,7 +104,7 @@ describe("Classes", () => {
       }
     }
     const animal = new Animal("mort");
-    expect(solveme).toBe(animal.name)
+    expect("mort").toBe(animal.name)
   });
 
   describe('inheritance', () => {
@@ -119,7 +119,7 @@ describe("Classes", () => {
       }
       const dog = new Dog();
       dog.setName("bethoven");
-      expect(solveme).toBe(dog.speak());
+      expect("bethoven barks").toBe(dog.speak());
     });
 
     it("you can call super constructor with super", () => {
@@ -132,7 +132,7 @@ describe("Classes", () => {
         speak() { return this.name + " barks"; }
       }
       const dog = new Dog("bethoven");
-      expect(solveme).toBe(dog.speak());
+      expect("bethoven barks").toBe(dog.speak());
     });
 
     it("you can call super method with super", () => {
@@ -145,23 +145,23 @@ describe("Classes", () => {
         speak() { return super.speak() + " and barks"; }
       }
       const dog = new Dog("bethoven");
-      expect(solveme).toBe(dog.speak());
+      expect("bethoven makes noise and barks").toBe(dog.speak());
     });
 
     it("you can use instanceof to know if an object is an instance of a class", () => {
       class Animal {}
       class Balloon {}
-      expect(solveme).toBe(new Animal() instanceof Animal);
-      expect(solveme).toBe(new Animal() instanceof Balloon);
+      expect(true).toBe(new Animal() instanceof Animal);
+      expect(false).toBe(new Animal() instanceof Balloon);
     });
 
     it("you can use instanceof to know (true/false) if an object is an instance of a class or inheritancy", () => {
       class Animal {}
       class Dog extends Animal {}
-      expect(solveme).toBe(new Animal() instanceof Animal);
-      expect(solveme).toBe(new Animal() instanceof Dog);
-      expect(solveme).toBe(new Dog() instanceof Animal);
-      expect(solveme).toBe(new Dog() instanceof Dog);
+      expect(true).toBe(new Animal() instanceof Animal);
+      expect(false).toBe(new Animal() instanceof Dog);
+      expect(true).toBe(new Dog() instanceof Animal);
+      expect(true).toBe(new Dog() instanceof Dog);
     });
   });
 
@@ -175,7 +175,7 @@ describe("Classes", () => {
         }
       }
       const thisTest = new ThisTest();
-      expect(solveme).toBe(thisTest.getThisWithFn());
+      expect(thisTest).toBe(thisTest.getThisWithFn());
     });
 
     it("() => {} shorthand functions preserves this", () => {
@@ -184,7 +184,7 @@ describe("Classes", () => {
         mult() { return [1,2,3].map(n => n * this.factor); }
       }
       const counters = new Counters(3);
-      expect(solveme).toEqual(counters.mult());
+      expect([3,6,9]).toEqual(counters.mult());
     });
 
     it("function() {} long notation uses this value is undefined", () => {
@@ -195,7 +195,7 @@ describe("Classes", () => {
         }
       }
       const thisTest = new ThisTest();
-      expect(solveme).toBe(thisTest.getThisWithFn());
+      expect(undefined).toBe(thisTest.getThisWithFn());
     });
 
     it('methods does not exists, they are simple functions', () => {
@@ -204,7 +204,7 @@ describe("Classes", () => {
       }
       const instance = new MethodTest();
       const four = instance.four;
-      expect(solveme).toBe(four());
+      expect(4).toBe(four());
     });
 
     it('functions called without the object, does have undefined this', () => {
@@ -213,7 +213,7 @@ describe("Classes", () => {
       }
       const instance = new ThisTest();
       const getThis = instance.getThis;
-      expect(solveme).toBe(getThis());
+      expect(undefined).toBe(getThis());
     });
 
     it('functions called with another object, does have the other object as this', () => {
@@ -224,7 +224,7 @@ describe("Classes", () => {
       const otherObj = {
         getThis: instance.getThis,
       };
-      expect(solveme).toBe(otherObj.getThis());
+      expect(otherObj).toBe(otherObj.getThis());
     });
 
     it('shorthand functions always preserves the original this', () => {
@@ -236,7 +236,7 @@ describe("Classes", () => {
       }
       const instance = new ThisTest();
       const getThis = instance.getGetThisFn();
-      expect(solveme).toBe(getThis());
+      expect(instance).toBe(getThis());
     });
   });
 
@@ -246,7 +246,7 @@ describe("Classes", () => {
         name = 'rico';
       }
       const instance = new Animal();
-      expect(solveme).toBe(instance.name);
+      expect("rico").toBe(instance.name);
     });
 
     it('create fixed this methods with =', () => {
@@ -255,7 +255,7 @@ describe("Classes", () => {
       }
       const instance = new ThisTest();
       const getThis = instance.getThis;
-      expect(solveme).toBe(getThis());
+      expect(instance).toBe(getThis());
     });
   });
 
@@ -267,7 +267,7 @@ describe("Classes", () => {
     const 動物 = makeAnimalClass();
     const instance = new 動物();
     const expectInstanceOf = (instance, Class) => {
-      expect(solveme).toBeInstanceOf(Class);
+      expect(instance).toBeInstanceOf(Class);
     };
     expectInstanceOf(instance, 動物);
   });
